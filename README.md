@@ -58,6 +58,20 @@ python src/calibrate_judge.py
 
 该脚本会使用 `data/judge_calibration.jsonl` 中的坏摘要样例，检查裁判是否把复制原文、错数字、漏限制条件的输出打得过高。
 
+## 人工标注：验证裁判可信度
+
+校准集只能证明裁判"不会放过明显的坏摘要"，裁判与人的判断是否一致需要人工锚定：
+
+```bash
+python src/annotate.py --target 40 --annotator your_name   # 盲评标注（可中断续标）
+python src/agreement.py                                     # 计算一致率，输出 results/agreement.md
+```
+
+标注是盲评：不显示 prompt 版本，展示顺序按 case 确定性随机翻转，标注时不展示裁判分数。
+`agreement.py` 输出总体/分层一致率与 Cohen's kappa，并列出全部分歧样本供复核。
+若某类别一致率明显偏低，该层的裁判结论应降级处理。
+建议隔几天用相同参数重跑 `annotate.py` 重标部分样本，报告会自动给出自我一致率作为天花板参照。
+
 ## 项目结构
 
 ```
@@ -70,8 +84,11 @@ src/
   run_eval.py        # 步骤 1：批量生成
   judge.py           # 步骤 2：LLM-as-judge 结构化评分 + pairwise
   calibrate_judge.py # 裁判校准
+  annotate.py        # 人工盲评标注 CLI
+  agreement.py       # 人工 vs 裁判一致率（kappa、分层、分歧明细）
   report.py          # 步骤 3：聚合 + 报告
-results/             # 输出：generations.jsonl / scores.jsonl / pairwise.jsonl / report.md
+data/human_labels.jsonl # 人工标注结果（annotate.py 生成，应提交入库）
+results/             # 输出：generations.jsonl / scores.jsonl / pairwise.jsonl / report.md / agreement.md
 ```
 
 ## 阅读顺序（学习路径）
