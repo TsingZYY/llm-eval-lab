@@ -1,0 +1,23 @@
+# 评估配置：改这里就能换模型、换 prompt 版本、换数据集
+dataset: data/testcases.jsonl
+
+# 要对比的模型（可以加多个）
+models:
+  - glm-5.2
+
+# 要对比的 prompt 版本（A/B 实验的核心）
+prompts:
+  v1: prompts/summarize_v1.txt
+  v2: prompts/summarize_v2.txt
+
+# 用哪个模型当"裁判"（LLM-as-judge）
+# 默认使用不同模型做裁判，避免 glm-5.2 评估自己的输出。
+# 这里走本地 CliRelay/OpenAI-compatible endpoint。
+judge_model: gpt-5.5
+openai_base_url: http://127.0.0.1:8317/v1
+
+output_dir: results
+max_tokens: 512
+num_runs: 3
+max_retries: 3
+structured_retries: 3

@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+*.jsonl.inprogress
+*.jsonl.rewrite
+*.md.tmp
+results/*
+!results/README.md
+!results/judge_calibration.jsonl
