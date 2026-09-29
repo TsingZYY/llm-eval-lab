@@ -1,5 +1,12 @@
 # llm-eval-lab：LLM Prompt 评估平台（入门骨架）
 
+## 项目档案：时间线、笔记、代码与反思
+
+[项目总览](https://github.com/TsingZYY/project-experience/blob/main/projects/llm-evaluation/README.md) · [时间线](https://github.com/TsingZYY/project-experience/blob/main/projects/llm-evaluation/TIMELINE.md) · [开发／研究笔记](https://github.com/TsingZYY/project-experience/blob/main/projects/llm-evaluation/NOTES.md) · [实际代码与入口](https://github.com/TsingZYY/project-experience/blob/main/projects/llm-evaluation/CODE.md) · [最终反思](https://github.com/TsingZYY/project-experience/blob/main/projects/llm-evaluation/REFLECTION.md)
+
+以上档案于2026-09-30依据跨对话记录及现存文件整理，保留原始结果的适用范围；此次整理没有重新运行实验。
+
+
 一个端到端的 LLM 评估 pipeline：**分层测试集 → 多轮批量实验 → LLM-as-judge 严格评分 + pairwise A/B 对比 → 统计报告**。
 
 它对应 AI/LLM Platform Engineer JD 里的每个关键词：
